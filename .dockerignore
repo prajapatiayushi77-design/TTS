@@ -9,3 +9,4 @@ tts_project/logs
 tts_project/.tts_checkpoints_*
 tts_project/*.wav
 tts_project/*.mp3
+

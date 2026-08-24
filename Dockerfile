@@ -17,8 +17,9 @@ RUN pip install --upgrade pip setuptools wheel && \
     pip install --no-cache-dir -r requirements-prod.txt
 
 COPY tts_project/ .
+COPY start.sh .
 RUN mkdir -p downloads uploads logs && chmod -R 755 /app
 
 EXPOSE 5000
 
-CMD exec gunicorn --bind 0.0.0.0:${PORT:-5000} --timeout 300 --workers 1 --worker-class sync --access-logfile - --error-logfile - wsgi:app
+CMD ["sh", "start.sh"]
