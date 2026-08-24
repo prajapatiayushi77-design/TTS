@@ -1,18 +1,23 @@
 # Production Requirements for Deployment
-# Install all optional dependencies for cloud deployment
-
-# Core dependencies (required)
+# Core dependencies
 pyttsx3>=2.90
 pydub>=0.25.1
 tqdm>=4.65.0
 Flask>=2.3.0
 Werkzeug>=2.3.0
 
-# Cloud TTS backends (for Vercel & serverless)
-edge-tts>=6.1.0      # Cloud-based neural voices (Vercel-friendly)
-gTTS>=2.5.0          # Google Text-to-Speech
+# Production server
+gunicorn>=21.0.0
 
-# Optional but recommended for production
-python-dotenv>=1.0.0 # Environment variable management
-gunicorn>=21.0.0     # Production WSGI server (for Railway/Render)
-psycopg2-binary>=2.9.0 # PostgreSQL support (if using Railway DB)
+# Cloud TTS backend (cloud-based, works everywhere)
+edge-tts>=6.1.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Optional: Database support
+# psycopg2-binary>=2.9.0
+
+# Optional: Additional TTS backends
+# gTTS>=2.5.0
+

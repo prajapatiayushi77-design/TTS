@@ -1,16 +1,16 @@
 services:
   - type: web
     name: tts-application
-    env: python
-    buildCommand: pip install -r requirements-prod.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11
-      - key: PYTHONUNBUFFERED
-        value: true
+    plan: free
+    runtime: docker
     autoDeploy: true
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: DEBUG
+        value: "False"
     disk:
       name: tts-data
       mountPath: /app
-      sizeGB: 5
+      sizeGB: 2

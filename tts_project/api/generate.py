@@ -1,12 +1,13 @@
 import json
 import os
+import sys
 from pathlib import Path
-from text_chunker import chunk_text
-from tts_engine import get_backend
-from audio_utils import concatenate_wavs
 import shutil
 import tempfile
 import base64
+
+# Add parent directory to path
+sys.path.insert(0, '/var/task')
 
 def handler(request):
     """
