@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: tts-application
+    env: python
+    buildCommand: pip install -r requirements-prod.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11
+      - key: PYTHONUNBUFFERED
+        value: true
+    autoDeploy: true
+    disk:
+      name: tts-data
+      mountPath: /app
+      sizeGB: 5

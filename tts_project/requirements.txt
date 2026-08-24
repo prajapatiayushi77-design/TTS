@@ -1,0 +1,10 @@
+# Core (required — offline backend)
+pyttsx3>=2.90
+pydub>=0.25.1
+tqdm>=4.65.0
+Flask>=2.3.0
+Werkzeug>=2.3.0
+
+# Optional backends (install only if you want to use them)
+edge-tts>=6.1.0      # for --backend edge  (free, online, neural voices) - RECOMMENDED for web/cloud
+# gTTS>=2.5.0          # for --backend gtts  (free, online, Google voices)

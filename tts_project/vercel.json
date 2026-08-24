@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/generate.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "api/voices.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/generate",
+      "dest": "/api/generate.py",
+      "methods": ["POST", "OPTIONS"]
+    },
+    {
+      "src": "/api/voices",
+      "dest": "/api/voices.py",
+      "methods": ["GET", "OPTIONS"]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}
