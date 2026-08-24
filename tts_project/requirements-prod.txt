@@ -1,23 +1,16 @@
-# Production Requirements for Deployment
-# Core dependencies
-pyttsx3>=2.90
-pydub>=0.25.1
-tqdm>=4.65.0
-Flask>=2.3.0
-Werkzeug>=2.3.0
+# Core TTS Application Dependencies
+Flask==2.3.0
+Werkzeug==2.3.0
+pyttsx3==2.99
+pydub==0.25.1
+tqdm==4.70.0
 
-# Production server
-gunicorn>=21.0.0
+# Production Server
+gunicorn==21.2.0
 
-# Cloud TTS backend (cloud-based, works everywhere)
-edge-tts>=6.1.0
+# Environment Management
+python-dotenv==1.0.0
 
-# Environment management
-python-dotenv>=1.0.0
-
-# Optional: Database support
-# psycopg2-binary>=2.9.0
-
-# Optional: Additional TTS backends
-# gTTS>=2.5.0
+# Optional TTS Backend (cloud-based)
+edge-tts==7.2.8
 

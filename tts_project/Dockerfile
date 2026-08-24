@@ -7,33 +7,32 @@ WORKDIR /app
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PORT=5000
+    PORT=5000 \
+    PYTHONPATH=/app
 
-# Install system dependencies for TTS
-RUN apt-get update && apt-get install -y \
-    espeak-ng \
-    ffmpeg \
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching
 COPY requirements-prod.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements-prod.txt
+RUN pip install --upgrade pip setuptools wheel && \
+    pip install --no-cache-dir -r requirements-prod.txt
 
 # Copy entire application
 COPY . .
 
 # Create necessary directories
-RUN mkdir -p downloads uploads logs
+RUN mkdir -p downloads uploads logs && \
+    chmod -R 755 /app
 
 # Expose port
-EXPOSE $PORT
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD python -c "import requests; requests.get('http://localhost:5000/')" || exit 1
+EXPOSE 5000
 
 # Run with Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--timeout", "300", "--workers", "2", "--threads", "2", "--worker-class", "sync", "--access-logfile", "-", "--error-logfile", "-", "wsgi:app"]
+CMD exec gunicorn --bind 0.0.0.0:5000 --timeout 300 --workers 1 --worker-class sync --access-logfile - --error-logfile - wsgi:app
 
