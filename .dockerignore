@@ -1,0 +1,11 @@
+**/__pycache__
+**/*.pyc
+.git
+.venv
+.env
+tts_project/downloads
+tts_project/uploads
+tts_project/logs
+tts_project/.tts_checkpoints_*
+tts_project/*.wav
+tts_project/*.mp3

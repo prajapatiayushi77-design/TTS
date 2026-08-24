@@ -1,0 +1,12 @@
+[build]
+builder = "dockerfile"
+dockerfile = "Dockerfile"
+
+[deploy]
+startCommand = "gunicorn --bind 0.0.0.0:$PORT --timeout 300 --workers 1 --worker-class sync --access-logfile - --error-logfile - wsgi:app"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 5
+
+[env]
+PYTHONUNBUFFERED = "1"
+DEBUG = "False"
